@@ -78,9 +78,6 @@ html:has(.program-detail) { scroll-padding-top: 0; }
 .program-profile summary > span::before, .program-profile summary > span::after { content: ''; height: 1px; width: 18px; position: absolute; top: 50%; background: var(--program-red); }
 .program-profile:not([open]) summary > span::after { transform: rotate(90deg); }
 .program-profile p { font-size: 20px; line-height: 1.45; margin: 0 32px 24px 0; }
-.program-goals { list-style: none; padding: 0; margin: 0 0 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.program-goals li { border-top: 2px solid var(--program-red); padding-top: 18px; font: 21px/1.35 PermianSlab, serif; }
-.program-goals span { display: block; color: var(--program-muted); font: 15px/1 PermianSans, sans-serif; margin-bottom: 18px; }
 .program-subheading { font: 700 26px/1.2 PermianSlab, serif; margin-bottom: 22px; }
 .program-outcomes { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; }
 .program-outcomes li { padding-left: 19px; position: relative; font: 20px/1.4 PermianSans, sans-serif; }
@@ -207,7 +204,6 @@ html:has(.program-detail) { scroll-padding-top: 0; }
   .program-admission-facts { grid-template-columns: 1fr 1fr; }
   .program-admission-facts > div:last-child { grid-column: 1 / -1; border-top: 1px solid var(--program-line); padding-top: 20px; }
   .program-passing { align-items: start; flex-direction: column; }
-  .program-goals { grid-template-columns: 1fr; }
   .teachers-track { grid-auto-columns: calc((100% - 20px) / 2); }
   .program-employers { grid-template-columns: 1fr; }
   .program-employers figure + figure { border-left: 1px solid var(--program-line); border-top: 0; }
@@ -304,4 +300,31 @@ html:has(.program-detail) { scroll-padding-top: 0; }
   .program-faq-answer { padding: 0 0 22px; }
   .program-faq-answer p { font-size: 18px; }
   .program-partners-heading { font-size: 23px; }
+}
+
+.program-international + .program-international { margin-top: 16px; }
+.program-international h3 { grid-column: 1; }
+.program-alumni { margin-top: 36px; }
+.program-alumni-heading { align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.program-alumni-heading h3 { margin: 0; }
+.program-demo-note { color: var(--program-muted); font: 15px/1.4 PermianSans, sans-serif; margin: 0 0 16px; }
+.program-alumni-track, .program-life-track { grid-auto-columns: calc((100% - 20px) / 2); }
+.program-alumni-card { border: 1px solid var(--program-line); }
+.program-alumni-card img, .program-life-photo img { display: block; width: 100%; object-fit: cover; background: #f2f2f3; }
+.program-alumni-card img { aspect-ratio: 4 / 3; object-position: center 35%; }
+.program-alumni-copy { padding: 20px; }
+.program-alumni-copy h4 { font: 700 23px/1.2 PermianSlab, serif; margin: 0 0 8px; }
+.program-alumni-year, .program-alumni-work { font: 16px/1.35 PermianSans, sans-serif; margin: 0 0 6px; }
+.program-alumni-year { color: var(--program-muted); }
+.program-alumni-copy blockquote { font: 17px/1.45 PermianSans, sans-serif; margin: 16px 0 0; }
+.program-alumni-copy blockquote p { margin: 0; }
+.program-carousel-heading.program-life-controls { align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.program-life-controls .program-demo-note { margin: 0; }
+.program-life-photo { margin: 0; }
+.program-life-photo img { aspect-ratio: 3 / 2; }
+.program-life-photo figcaption { font: 16px/1.35 PermianSans, sans-serif; color: var(--program-muted); margin-top: 8px; }
+.program-bottom .program-vk { justify-content: center; gap: 8px; background: #0077ff; border-color: #0077ff; color: #fff; font-size: 19px; font-weight: 700; }
+.program-bottom .program-vk:hover, .program-bottom .program-vk:focus-visible { background: #0064d9; border-color: #0064d9; color: #fff; }
+@media (max-width: 767px) {
+  .program-alumni-track, .program-life-track { grid-auto-columns: 100%; gap: 16px; }
 }

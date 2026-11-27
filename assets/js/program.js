@@ -2,20 +2,24 @@
   'use strict';
   const main = document.querySelector('.program-detail');
   if (!main) return;
-  const links = [...main.querySelectorAll('.program-sidebar a')];
-  const sections = links.map(link => main.querySelector(link.getAttribute('href')));
-  const sidebar = main.querySelector('.program-sidebar');
+  const navs = [...main.querySelectorAll('.program-sidebar nav, .program-mobile-nav')].map(nav => {
+    const links = [...nav.querySelectorAll('a[href^="#"]')];
+    const sections = links.map(link => main.querySelector(link.hash));
+    return { links, sections };
+  });
   let framePending = false;
   function updateActiveSection() {
-    const top = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 86;
-    let active = sections[0];
-    for (const section of sections) if (section.getBoundingClientRect().top <= top + 100) active = section;
-    links.forEach(link => {
-      if (link.hash === '#' + active.id) link.setAttribute('aria-current','location');
-      else link.removeAttribute('aria-current');
-    });
-    const bounds = main.getBoundingClientRect();
-    sidebar.classList.toggle('is-outside-content', bounds.bottom <= top + 80);
+    const headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 86;
+    const mobileNavHeight = parseFloat(getComputedStyle(main).getPropertyValue('--program-mobile-nav-height')) || 0;
+    const marker = headerHeight + mobileNavHeight + 100;
+    for (const { links, sections } of navs) {
+      let active = sections[0];
+      for (const section of sections) if (section.getBoundingClientRect().top <= marker) active = section;
+      links.forEach(link => {
+        if (link.hash === '#' + active.id) link.setAttribute('aria-current','location');
+        else link.removeAttribute('aria-current');
+      });
+    }
     framePending = false;
   }
   window.addEventListener('scroll', () => {
@@ -63,7 +67,9 @@
       const visible = Math.max(1,Math.floor((track.clientWidth + gap + 1) / step));
       prev.disabled = track.scrollLeft <= 2;
       next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
-      progress.textContent = `${first + 1}–${Math.min(cards.length,first + visible)} / ${cards.length}`;
+      const last = Math.min(cards.length,first + visible);
+      const range = last === first + 1 ? String(last) : `${first + 1}–${last}`;
+      progress.textContent = `${range} / ${cards.length}`;
     }
     prev.addEventListener('click', () => track.scrollBy({left:-track.clientWidth,behavior:behavior()}));
     next.addEventListener('click', () => track.scrollBy({left:track.clientWidth,behavior:behavior()}));

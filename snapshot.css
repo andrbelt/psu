@@ -1,0 +1,5 @@
+@charset "utf-8";
+
+:is(.faculties-people__content-contacts, .cards-education__card-contacts) a:is([href^="tel:" i]:not([href="tel:"]), [href^="mailto:" i]:not([href="mailto:"])), a.psu-contact-link:any-link { color: rgb(29, 27, 27); text-decoration: underline 0.18em rgb(206, 21, 49); text-decoration-skip-ink: none; text-underline-offset: 0.08em; overflow-wrap: anywhere; }
+
+:is(.faculties-people__content-contacts, .cards-education__card-contacts) a:is([href^="tel:" i]:not([href="tel:"]), [href^="mailto:" i]:not([href="mailto:"]))::before, :is(.faculties-people__content-contacts, .cards-education__card-contacts) a:is([href^="tel:" i]:not([href="tel:"]), [href^="mailto:" i]:not([href="mailto:"]))::after, a.psu-contact-link::before, a.psu-contact-link::after { content: none; }

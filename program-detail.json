@@ -1,0 +1,176 @@
+{
+  "source": "https://psu.ru/programms/prikladnaya-matematika-i-informatika-iknt/",
+  "code": "01.03.02",
+  "title": "Прикладная математика и информатика",
+  "profile": "Программа широкого профиля",
+  "institute": "Институт компьютерных наук и технологий",
+  "university": "Пермский государственный национальный исследовательский университет",
+  "level": "Бакалавриат",
+  "language": "Русский",
+  "mode": "Очная",
+  "duration": "4 года",
+  "budgetPlaces": 90,
+  "paidPlaces": 3,
+  "tuition": 215000,
+  "resultYear": 2026,
+  "passingScores": {
+    "budget": 201,
+    "paid": 172
+  },
+  "hero": "assets/images/program/mathematics-cover.jpg",
+  "practicePartners": [
+    {
+      "name": "Лаборатория биомеханики ИМиМ КФУ",
+      "caption": "Казанский федеральный университет",
+      "image": "assets/images/program/image_18_02_24_05_44._1_.jpg"
+    },
+    {
+      "name": "Ак Барс Банк",
+      "caption": "Банковская сфера",
+      "image": "assets/images/program/2akbars.jpg"
+    },
+    {
+      "name": "Центральный банк Российской Федерации",
+      "caption": "Финансовая сфера",
+      "image": "assets/images/program/3czbrf-300x102-1.jpg"
+    },
+    {
+      "name": "БАРС груп",
+      "caption": "Информационные технологии",
+      "image": "assets/images/program/5barsgrup-300x158-1.jpg"
+    }
+  ],
+  "employers": [
+    {
+      "name": "АО «ЭР-Телеком Холдинг»",
+      "image": "assets/images/program/ertelecom.svg",
+      "website": "https://ertelecom.ru/",
+      "logoSource": "https://static.tildacdn.com/tild3436-3431-4931-b863-303362323236/Logo_Horizontal_Colo.svg",
+      "logoSourcePage": "https://rabotaertelecom.ru/welcome"
+    },
+    {
+      "name": "ПАО «ПНППК»",
+      "image": "assets/images/program/pnppk.svg",
+      "website": "https://pnppk.ru/",
+      "logoSource": "https://pnppk.ru/images/tild6332-3531-4931-b734-313065353832__svg_1788956314685.svg",
+      "inverse": true
+    },
+    {
+      "name": "ООО «Тен.Лаб»",
+      "image": "assets/images/program/tenlab.svg",
+      "website": "https://ten-lab.ru/",
+      "logoSource": "https://ten-lab.ru/assets/img/logo-tenlab.svg",
+      "inverse": true
+    }
+  ],
+  "international": {
+    "name": "Оксфорд",
+    "country": "Великобритания"
+  },
+  "tuitionUrl": null,
+  "sourceFile": "2.mhtml",
+  "tuitionAcademicYear": "2026/2027",
+  "passingScoresSource": "itogi-priema-2026-bakalavriat-o-z (2).pdf, страница 1",
+  "about": [
+    "Программа объединяет математику с программированием для решения прикладных задач. Основные дисциплины включают системное ПО, методы оптимизации, численные методы и теорию игр. Особенность — фокус на исследовании операций и сложных вычислениях.",
+    "Выпускники осваивают Big Data технологии и эконометрику. Машинное обучение и нейронные сети готовят к работе с данными. Программа развивает навыки оптимизации процессов, выпускники работают в ИИ и аналитических центрах. Направление идеально для тех, кто сочетает математику с IT."
+  ],
+  "profiles": [
+    {
+      "title": "Программа широкого профиля",
+      "description": "Математика и программирование для решения прикладных задач, исследования операций и сложных вычислений."
+    },
+    {
+      "title": "Искусственный интеллект и большие данные",
+      "description": "Программа реализуется в сетевой форме."
+    }
+  ],
+  "ege": [
+    [
+      {
+        "label": "Математика",
+        "minScore": 40
+      }
+    ],
+    [
+      {
+        "label": "Информатика",
+        "minScore": 46
+      },
+      {
+        "label": "Физика",
+        "minScore": 41
+      }
+    ],
+    [
+      {
+        "label": "Русский язык",
+        "minScore": 40
+      }
+    ]
+  ],
+  "coursePanels": [
+    {
+      "id": "foundation",
+      "label": "Дисциплины",
+      "caption": "Что будешь изучать",
+      "title": "Основные дисциплины",
+      "items": [
+        "Системное и прикладное программное обеспечение",
+        "Методы оптимизации",
+        "Численные методы",
+        "Теория игр и исследование операций"
+      ]
+    },
+    {
+      "id": "special",
+      "label": "Компетенции",
+      "caption": "Чему научишься",
+      "title": "Ключевые компетенции",
+      "items": [
+        "Big Data технологии",
+        "Эконометрика и финансовое моделирование",
+        "Машинное обучение и нейронные сети"
+      ]
+    }
+  ],
+  "outcomes": [
+    "Big Data технологии",
+    "Эконометрика и финансовое моделирование",
+    "Машинное обучение и нейронные сети",
+    "Навыки оптимизации процессов",
+    "Работа с данными"
+  ],
+  "career": {
+    "description": "Выпускники востребованы в аналитике, финансах и искусственном интеллекте.",
+    "salary": [
+      {
+        "label": "Junior",
+        "value": "100–150 тыс. ₽"
+      },
+      {
+        "label": "Senior",
+        "value": "250–500 тыс. ₽"
+      }
+    ]
+  },
+  "contacts": {
+    "manager": "Наталия Сергеевна Кнутова",
+    "role": "Старший преподаватель, руководитель образовательной программы",
+    "email": "iknt@psu.ru",
+    "links": [
+      {
+        "label": "Группа ИКНТ ВКонтакте",
+        "href": "https://vk.ru/psu_iknt"
+      },
+      {
+        "label": "Телеграм-канал ИКНТ",
+        "href": "https://t.me/csti_psu"
+      },
+      {
+        "label": "Телеграм-канал для абитуриентов ИКНТ",
+        "href": "https://t.me/+oxt4X9YQIbszYmNi"
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+/* Local adjustments: original appearance is defined in main.css. */
+@font-face {
+  font-family: PermianSerif;
+  src: url("../fonts/PermianSerifTypeface.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: PermianSerif;
+  src: url("../fonts/PermianSerifTypeface-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+#app { padding-top: var(--header-height, 86px); }
+.empty-content { min-height: 55vh; }
+body.overlay-open { overflow: hidden; }
+.header__mobile, .header__search { padding-top: var(--header-height, 86px); }
+.search-scope {
+  width: 100%;
+  height: 56px;
+  padding: 0 40px 0 16px;
+  border: 1px solid #fcfcfc;
+  border-radius: 0;
+  background: #1d1b1b;
+  color: #fcfcfc;
+  font: 400 18px PermianSans, sans-serif;
+}
+[data-subordinate-item-pk].active { display: block !important; opacity: 1; }
+@media (min-width: 1101px) {
+  .header__nav-link-btn { display: none; }
+}
+@media (max-width: 1100px) {
+  .header__nav-link-btn { margin-left: 8px; background: transparent; border-color: transparent; color: inherit; padding: 0; width: 40px; }
+  .header__nav-link-btn[aria-expanded="true"] svg { transform: rotate(90deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}

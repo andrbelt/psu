@@ -1,0 +1,1758 @@
+{
+  "$schema": "./admissions.schema.json",
+  "schemaVersion": 2,
+  "metadata": {
+    "prototype": true,
+    "admissionYear": 2027,
+    "resultYear": 2026,
+    "resultsSource": {
+      "fileName": "itogi-priema-2026-bakalavriat-o-z (2).pdf",
+      "asOf": "2026-09-25"
+    },
+    "demoFields": [
+      "programs[].directionCode",
+      "programs[].searchAliases",
+      "offers[].tuition",
+      "competitions[].plannedPlaces",
+      "competitions[].examRequirements"
+    ]
+  },
+  "catalogs": {
+    "subjects": [
+      {
+        "id": "russian",
+        "label": "Русский язык"
+      },
+      {
+        "id": "mathematics",
+        "label": "Профильная математика"
+      },
+      {
+        "id": "physics",
+        "label": "Физика"
+      },
+      {
+        "id": "chemistry",
+        "label": "Химия"
+      },
+      {
+        "id": "informatics",
+        "label": "Информатика"
+      },
+      {
+        "id": "biology",
+        "label": "Биология"
+      },
+      {
+        "id": "history",
+        "label": "История"
+      },
+      {
+        "id": "geography",
+        "label": "География"
+      },
+      {
+        "id": "socialStudies",
+        "label": "Обществознание"
+      },
+      {
+        "id": "literature",
+        "label": "Литература"
+      },
+      {
+        "id": "foreignLanguage",
+        "label": "Иностранный язык"
+      }
+    ],
+    "levels": {
+      "bachelor": "Бакалавриат",
+      "specialist": "Специалитет"
+    },
+    "studyModes": {
+      "fullTime": "Очная",
+      "partTime": "Заочная"
+    },
+    "fundingTypes": {
+      "budget": "Бюджет",
+      "paid": "Платно"
+    },
+    "faculties": [
+      {
+        "id": "biology",
+        "label": "Биологический факультет"
+      },
+      {
+        "id": "geography",
+        "label": "Географический факультет"
+      },
+      {
+        "id": "geology",
+        "label": "Геологический факультет"
+      },
+      {
+        "id": "computer-science",
+        "label": "Институт компьютерных наук и технологий"
+      },
+      {
+        "id": "history-politics",
+        "label": "Историко-политологический факультет"
+      },
+      {
+        "id": "physics-mathematics",
+        "label": "Физико-математический институт"
+      },
+      {
+        "id": "philology",
+        "label": "Факультет филологии и коммуникации"
+      },
+      {
+        "id": "philosophy-sociology",
+        "label": "Философско-социологический факультет"
+      },
+      {
+        "id": "chemistry",
+        "label": "Химический факультет"
+      },
+      {
+        "id": "economics",
+        "label": "Экономический факультет"
+      },
+      {
+        "id": "law",
+        "label": "Юридический факультет"
+      }
+    ]
+  },
+  "form": {
+    "requiredSubjectIds": [
+      "russian"
+    ],
+    "minOtherSubjects": 2,
+    "maxOtherSubjects": null,
+    "filters": {
+      "hasPaidPlaces": false,
+      "studyModes": [],
+      "facultyIds": []
+    }
+  },
+  "programs": [
+    {
+      "id": "biology",
+      "title": "Биология",
+      "directionCode": "06.03.01",
+      "directionTitle": "Биология",
+      "level": "bachelor",
+      "searchAliases": [
+        "биолог"
+      ],
+      "facultyIds": [
+        "biology"
+      ]
+    },
+    {
+      "id": "ecology-land",
+      "title": "Управление земельными ресурсами и биологический контроль окружающей среды",
+      "directionCode": "05.03.06",
+      "directionTitle": "Экология и природопользование",
+      "level": "bachelor",
+      "searchAliases": [
+        "экология",
+        "земельные ресурсы"
+      ],
+      "facultyIds": [
+        "biology"
+      ]
+    },
+    {
+      "id": "ecology-applied",
+      "title": "Прикладная экология и охрана природы",
+      "directionCode": "05.03.06",
+      "directionTitle": "Экология и природопользование",
+      "level": "bachelor",
+      "searchAliases": [
+        "экология",
+        "охрана природы"
+      ],
+      "facultyIds": [
+        "geography"
+      ]
+    },
+    {
+      "id": "information-systems",
+      "title": "Информационные системы и технологии",
+      "directionCode": "09.03.02",
+      "directionTitle": "Информационные системы и технологии",
+      "level": "bachelor",
+      "searchAliases": [
+        "ист",
+        "ит"
+      ],
+      "facultyIds": [
+        "computer-science"
+      ]
+    },
+    {
+      "id": "journalism",
+      "title": "Журналистика",
+      "directionCode": "42.03.02",
+      "directionTitle": "Журналистика",
+      "level": "bachelor",
+      "searchAliases": [
+        "журналист",
+        "журфак"
+      ],
+      "facultyIds": [
+        "philology"
+      ]
+    },
+    {
+      "id": "psychology",
+      "title": "Психология",
+      "directionCode": "37.03.01",
+      "directionTitle": "Психология",
+      "level": "bachelor",
+      "searchAliases": [
+        "психолог"
+      ],
+      "facultyIds": [
+        "philosophy-sociology"
+      ]
+    },
+    {
+      "id": "pharmacy",
+      "title": "Фармация",
+      "directionCode": "33.05.01",
+      "directionTitle": "Фармация",
+      "level": "specialist",
+      "searchAliases": [
+        "фармацевт"
+      ],
+      "facultyIds": [
+        "chemistry"
+      ]
+    },
+    {
+      "id": "economics",
+      "title": "Экономика",
+      "directionCode": "38.03.01",
+      "directionTitle": "Экономика",
+      "level": "bachelor",
+      "searchAliases": [
+        "экономист",
+        "экономфак"
+      ],
+      "facultyIds": [
+        "economics"
+      ]
+    },
+    {
+      "id": "law",
+      "title": "Юриспруденция",
+      "directionCode": "40.03.01",
+      "directionTitle": "Юриспруденция",
+      "level": "bachelor",
+      "searchAliases": [
+        "юрист",
+        "юрфак"
+      ],
+      "facultyIds": [
+        "law"
+      ]
+    },
+    {
+      "id": "judicial-prosecution",
+      "title": "Судебная и прокурорская деятельность",
+      "directionCode": "40.05.04",
+      "directionTitle": "Судебная и прокурорская деятельность",
+      "level": "specialist",
+      "searchAliases": [
+        "суд",
+        "прокуратура"
+      ],
+      "facultyIds": [
+        "law"
+      ]
+    },
+    {
+      "id": "geology",
+      "title": "Геология",
+      "directionCode": null,
+      "directionTitle": "Геология",
+      "level": "bachelor",
+      "searchAliases": [],
+      "facultyIds": [
+        "geology"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "История",
+      "directionCode": null,
+      "directionTitle": "История",
+      "level": "bachelor",
+      "searchAliases": [],
+      "facultyIds": [
+        "history-politics"
+      ]
+    },
+    {
+      "id": "physics",
+      "title": "Физика",
+      "directionCode": null,
+      "directionTitle": "Физика",
+      "level": "bachelor",
+      "searchAliases": [],
+      "facultyIds": [
+        "physics-mathematics"
+      ]
+    }
+  ],
+  "offers": [
+    {
+      "id": "biology-fullTime",
+      "programId": "biology",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "biology-fullTime-budget-2027",
+        "paid": "biology-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 169000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "ecology-land-fullTime",
+      "programId": "ecology-land",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "ecology-land-fullTime-budget-2027",
+        "paid": "ecology-land-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 167000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "ecology-applied-fullTime",
+      "programId": "ecology-applied",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "ecology-applied-fullTime-budget-2027",
+        "paid": "ecology-applied-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 167000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "information-systems-fullTime",
+      "programId": "information-systems",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "information-systems-fullTime-budget-2027",
+        "paid": "information-systems-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 189000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "journalism-fullTime",
+      "programId": "journalism",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "journalism-fullTime-budget-2027",
+        "paid": "journalism-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 159000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "psychology-fullTime",
+      "programId": "psychology",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "psychology-fullTime-budget-2027",
+        "paid": "psychology-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 157000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "psychology-partTime",
+      "programId": "psychology",
+      "admissionYear": 2027,
+      "studyMode": "partTime",
+      "competitionIds": {
+        "budget": "psychology-partTime-budget-2027",
+        "paid": "psychology-partTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 79000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "pharmacy-fullTime",
+      "programId": "pharmacy",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "pharmacy-fullTime-budget-2027",
+        "paid": "pharmacy-fullTime-paid-2027"
+      },
+      "tuition": null
+    },
+    {
+      "id": "economics-fullTime",
+      "programId": "economics",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "economics-fullTime-budget-2027",
+        "paid": "economics-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 165000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "economics-partTime",
+      "programId": "economics",
+      "admissionYear": 2027,
+      "studyMode": "partTime",
+      "competitionIds": {
+        "budget": "economics-partTime-budget-2027",
+        "paid": "economics-partTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 79000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "law-fullTime",
+      "programId": "law",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "law-fullTime-budget-2027",
+        "paid": "law-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 175000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "law-partTime",
+      "programId": "law",
+      "admissionYear": 2027,
+      "studyMode": "partTime",
+      "competitionIds": {
+        "budget": "law-partTime-budget-2027",
+        "paid": "law-partTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 89000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "judicial-prosecution-fullTime",
+      "programId": "judicial-prosecution",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "judicial-prosecution-fullTime-budget-2027",
+        "paid": "judicial-prosecution-fullTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 179000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "judicial-prosecution-partTime",
+      "programId": "judicial-prosecution",
+      "admissionYear": 2027,
+      "studyMode": "partTime",
+      "competitionIds": {
+        "budget": "judicial-prosecution-partTime-budget-2027",
+        "paid": "judicial-prosecution-partTime-paid-2027"
+      },
+      "tuition": {
+        "amount": 94000,
+        "currency": "RUB",
+        "period": "academicYear",
+        "academicYear": "2027/2028",
+        "status": "demo"
+      }
+    },
+    {
+      "id": "geology-fullTime",
+      "programId": "geology",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "geology-fullTime-budget-2027",
+        "paid": "geology-fullTime-paid-2027"
+      },
+      "tuition": null
+    },
+    {
+      "id": "history-fullTime",
+      "programId": "history",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "history-fullTime-budget-2027",
+        "paid": "history-fullTime-paid-2027"
+      },
+      "tuition": null
+    },
+    {
+      "id": "physics-fullTime",
+      "programId": "physics",
+      "admissionYear": 2027,
+      "studyMode": "fullTime",
+      "competitionIds": {
+        "budget": "physics-fullTime-budget-2027",
+        "paid": "physics-fullTime-paid-2027"
+      },
+      "tuition": null
+    }
+  ],
+  "competitions": [
+    {
+      "id": "biology-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 90,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "chemistry",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "biology-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 15,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "chemistry",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "ecology-land-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 25,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "geography",
+            "minScore": 40
+          },
+          {
+            "type": "ege",
+            "subjectId": "chemistry",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "ecology-land-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 10,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "geography",
+            "minScore": 40
+          },
+          {
+            "type": "ege",
+            "subjectId": "chemistry",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "ecology-applied-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 25,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "geography",
+            "minScore": 40
+          },
+          {
+            "type": "ege",
+            "subjectId": "chemistry",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "ecology-applied-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 15,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "geography",
+            "minScore": 40
+          },
+          {
+            "type": "ege",
+            "subjectId": "chemistry",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "information-systems-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 60,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "mathematics",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "physics",
+            "minScore": 45
+          },
+          {
+            "type": "ege",
+            "subjectId": "informatics",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "information-systems-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 25,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "mathematics",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "physics",
+            "minScore": 45
+          },
+          {
+            "type": "ege",
+            "subjectId": "informatics",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "journalism-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 5,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "literature",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "dvi",
+            "title": "Творческое испытание по журналистике",
+            "minScore": 45
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "journalism-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 35,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "literature",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "dvi",
+            "title": "Творческое испытание по журналистике",
+            "minScore": 45
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "psychology-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 30,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "socialStudies",
+            "minScore": 45
+          },
+          {
+            "type": "ege",
+            "subjectId": "mathematics",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "psychology-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 30,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "socialStudies",
+            "minScore": 45
+          },
+          {
+            "type": "ege",
+            "subjectId": "mathematics",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "psychology-partTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 0,
+      "status": "demo",
+      "examRequirements": null
+    },
+    {
+      "id": "psychology-partTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 65,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "socialStudies",
+            "minScore": 45
+          },
+          {
+            "type": "ege",
+            "subjectId": "mathematics",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "pharmacy-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 25,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "biology",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "chemistry",
+            "minScore": 40
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "pharmacy-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 0,
+      "status": "demo",
+      "examRequirements": null
+    },
+    {
+      "id": "economics-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 25,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "mathematics",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "socialStudies",
+            "minScore": 45
+          },
+          {
+            "type": "ege",
+            "subjectId": "informatics",
+            "minScore": 46
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "economics-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 50,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "mathematics",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "socialStudies",
+            "minScore": 45
+          },
+          {
+            "type": "ege",
+            "subjectId": "informatics",
+            "minScore": 46
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "economics-partTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 0,
+      "status": "demo",
+      "examRequirements": null
+    },
+    {
+      "id": "economics-partTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 45,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "mathematics",
+          "minScore": 40
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "socialStudies",
+            "minScore": 45
+          },
+          {
+            "type": "ege",
+            "subjectId": "informatics",
+            "minScore": 46
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "law-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 15,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "socialStudies",
+          "minScore": 45
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "history",
+            "minScore": 36
+          },
+          {
+            "type": "ege",
+            "subjectId": "foreignLanguage",
+            "minScore": 30
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "law-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 140,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "socialStudies",
+          "minScore": 45
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "history",
+            "minScore": 36
+          },
+          {
+            "type": "ege",
+            "subjectId": "foreignLanguage",
+            "minScore": 30
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "law-partTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 0,
+      "status": "demo",
+      "examRequirements": null
+    },
+    {
+      "id": "law-partTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 130,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "socialStudies",
+          "minScore": 45
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "history",
+            "minScore": 36
+          },
+          {
+            "type": "ege",
+            "subjectId": "foreignLanguage",
+            "minScore": 30
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "judicial-prosecution-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 0,
+      "status": "demo",
+      "examRequirements": null
+    },
+    {
+      "id": "judicial-prosecution-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 60,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "socialStudies",
+          "minScore": 45
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "history",
+            "minScore": 36
+          },
+          {
+            "type": "ege",
+            "subjectId": "foreignLanguage",
+            "minScore": 30
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "judicial-prosecution-partTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": 0,
+      "status": "demo",
+      "examRequirements": null
+    },
+    {
+      "id": "judicial-prosecution-partTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": 35,
+      "status": "demo",
+      "examRequirements": {
+        "primary": {
+          "type": "ege",
+          "subjectId": "socialStudies",
+          "minScore": 45
+        },
+        "choice": [
+          {
+            "type": "ege",
+            "subjectId": "history",
+            "minScore": 36
+          },
+          {
+            "type": "ege",
+            "subjectId": "foreignLanguage",
+            "minScore": 30
+          }
+        ],
+        "russian": {
+          "type": "ege",
+          "subjectId": "russian",
+          "minScore": 40
+        }
+      }
+    },
+    {
+      "id": "geology-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": null,
+      "status": "unknown",
+      "examRequirements": null
+    },
+    {
+      "id": "geology-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": null,
+      "status": "unknown",
+      "examRequirements": null
+    },
+    {
+      "id": "history-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": null,
+      "status": "unknown",
+      "examRequirements": null
+    },
+    {
+      "id": "history-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": null,
+      "status": "unknown",
+      "examRequirements": null
+    },
+    {
+      "id": "physics-fullTime-budget-2027",
+      "admissionYear": 2027,
+      "funding": "budget",
+      "scope": "offer",
+      "plannedPlaces": null,
+      "status": "unknown",
+      "examRequirements": null
+    },
+    {
+      "id": "physics-fullTime-paid-2027",
+      "admissionYear": 2027,
+      "funding": "paid",
+      "scope": "offer",
+      "plannedPlaces": null,
+      "status": "unknown",
+      "examRequirements": null
+    }
+  ],
+  "admissionResults": [
+    {
+      "offerIds": [
+        "biology-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 90,
+      "passingScore": 185,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "biology-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 5,
+      "passingScore": 150,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "ecology-land-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 25,
+      "passingScore": 170,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "ecology-land-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 2,
+      "passingScore": 141,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "ecology-applied-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 26,
+      "passingScore": 168,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "ecology-applied-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 4,
+      "passingScore": 157,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "information-systems-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 60,
+      "passingScore": 194,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "information-systems-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 3,
+      "passingScore": 185,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "journalism-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 2,
+      "passingScore": null,
+      "maxScore": 300,
+      "status": "scoreNotReported",
+      "sourcePage": 2
+    },
+    {
+      "offerIds": [
+        "journalism-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 28,
+      "passingScore": 135,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 2
+    },
+    {
+      "offerIds": [
+        "psychology-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 30,
+      "passingScore": 212,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "psychology-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 5,
+      "passingScore": 175,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "psychology-partTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 50,
+      "passingScore": 155,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 4
+    },
+    {
+      "offerIds": [
+        "pharmacy-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 25,
+      "passingScore": 165,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "pharmacy-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": null,
+      "passingScore": null,
+      "maxScore": 300,
+      "status": "dashInSource",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "economics-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 25,
+      "passingScore": 238,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "economics-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 37,
+      "passingScore": 143,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "economics-partTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 26,
+      "passingScore": 145,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 4
+    },
+    {
+      "offerIds": [
+        "law-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 11,
+      "passingScore": null,
+      "maxScore": 300,
+      "status": "scoreNotReported",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "law-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 118,
+      "passingScore": 155,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "law-partTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 111,
+      "passingScore": 140,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 4
+    },
+    {
+      "offerIds": [
+        "judicial-prosecution-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": null,
+      "passingScore": null,
+      "maxScore": 300,
+      "status": "dashInSource",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "judicial-prosecution-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 47,
+      "passingScore": 146,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 3
+    },
+    {
+      "offerIds": [
+        "judicial-prosecution-partTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 22,
+      "passingScore": 137,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 4
+    },
+    {
+      "offerIds": [
+        "geology-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 120,
+      "passingScore": 178,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "geology-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 10,
+      "passingScore": 152,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 1
+    },
+    {
+      "offerIds": [
+        "history-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 30,
+      "passingScore": 222,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 2
+    },
+    {
+      "offerIds": [
+        "history-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": 5,
+      "passingScore": 160,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 2
+    },
+    {
+      "offerIds": [
+        "physics-fullTime"
+      ],
+      "year": 2026,
+      "funding": "budget",
+      "scope": "offer",
+      "enrolledCount": 10,
+      "passingScore": 189,
+      "maxScore": 300,
+      "status": "reported",
+      "sourcePage": 2
+    },
+    {
+      "offerIds": [
+        "physics-fullTime"
+      ],
+      "year": 2026,
+      "funding": "paid",
+      "scope": "offer",
+      "enrolledCount": null,
+      "passingScore": null,
+      "maxScore": 300,
+      "status": "dashInSource",
+      "sourcePage": 2
+    }
+  ]
+}

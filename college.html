@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Колледж — Пермский университет</title>
+  <link rel="stylesheet" href="assets/css/template.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/local.css">
+  <link rel="stylesheet" href="assets/css/admissions.css">
+  <link rel="stylesheet" href="assets/css/admissions-page.css">
+  <script src="assets/js/admissions-prototype-data.js" defer></script>
+  <script src="assets/js/admissions-page.js" defer></script>
+</head>
+<body>
+<header class="college-header container">
+  <a href="index.html" aria-label="Пермский университет — абитуриентам">
+    <svg width="200" height="50" aria-hidden="true"><use href="assets/images/icons.svg#logo-header"></use></svg>
+  </a>
+  <nav aria-label="Поступление">
+    <a href="index.html#programs">Абитуриентам</a>
+    <a href="index.html#events">Мероприятия</a>
+  </nav>
+</header>
+<main class="admissions college-entry">
+  <section class="container entry-section" aria-labelledby="college-title">
+    <h1 class="entry-heading" id="college-title">Колледж Пермского университета</h1>
+    <div class="entry-grid entry-grid-two">
+      <article class="entry-card">
+        <h2>Колледж профессионального образования</h2>
+        <p>Посмотри, каким специальностям учат в колледже, и проверь условия приёма после 9-го или 11-го класса.</p>
+        <a href="https://psu.ru/postuplenie/srednee-professionalnoe-obrazovanie/">Как поступить в колледж</a>
+        <a href="https://psu.ru/divisions/kolledzh-professionalnogo-obrazovaniya/">О колледже</a>
+      </article>
+      <section id="college-open-day" aria-label="День открытых дверей колледжа"><div id="college-event"></div></section>
+    </div>
+  </section>
+  <dialog class="entry-dialog" id="admissions-dialog" aria-labelledby="admissions-dialog-title">
+    <div class="entry-dialog-header"><h2 id="admissions-dialog-title"></h2><form method="dialog"><button class="entry-dialog-close" type="submit" aria-label="Закрыть окно">×</button></form></div>
+    <div id="admissions-dialog-body"></div>
+  </dialog>
+</main>
+</body>
+</html>

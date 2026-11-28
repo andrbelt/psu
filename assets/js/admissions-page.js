@@ -7,6 +7,14 @@
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   })[character]);
   const rulesUrl = 'https://olymp.psu.ru/assets/user-doc/informatics/pravila-priema_bkl-2026.pdf';
+  const confirmedEvent = {
+    id: 'history-olympiad', title: '«Юные таланты» по истории',
+    text: 'Олимпиада для учеников 10–11-х классов.',
+    date: '5 декабря 2026 — отбор, 12 декабря 2026 — финал',
+    format: 'Отбор онлайн, финал в ПГНИУ', registration: 'До 4 декабря включительно',
+    action: 'Условия и регистрация', url: 'https://olymp.psu.ru/news/otkryta-registratsiya-na-olimpiadu-po-istorii',
+    ends: '2026-12-12'
+  };
   const applyUrl = 'https://psu.ru/postuplenie/podat-dokumenty-s-20-iyunya/';
   const portalUrl = 'https://www.gosuslugi.ru/vuzonline';
 
@@ -41,11 +49,6 @@
       paragraphs: ['Подать заявление можно через Госуслуги, лично в приёмной комиссии или почтой. Для иностранных граждан предусмотрены отдельные условия подачи.'],
       links: [['Госуслуги', portalUrl], ['Страница подачи документов ПГНИУ', applyUrl], ['Адрес очного приёма', 'index.html#contacts']]
     },
-    'after-college': {
-      title: 'Поступление после СПО',
-      paragraphs: ['Сравни профиль своего диплома с выбранным направлением. Условия приёма подскажут, в каких случаях можно сдать вступительные испытания в университете и когда нужны результаты ЕГЭ.'],
-      links: [['Правила приёма на 2026 год', rulesUrl]]
-    },
     'club-sport': {
       title: 'Спорт',
       paragraphs: ['Выбери секцию или познакомься с турклубом «Пермский период». Уточни у организаторов, где проходит ближайшая тренировка или выезд.']
@@ -72,12 +75,12 @@
     };
   }
 
-  function eventCard(event, heading = 'h3') {
-    const destination = event.id === 'college-open-day' && !get('college-event')
-      ? '<a href="college.html#college-open-day">Открыть страницу колледжа</a>'
+  function eventCard(event) {
+    const url = event.url || (event.id === 'college-open-day' && !get('college-event') ? 'college.html#college-open-day' : '');
+    const destination = url ? '<a href="' + escape(url) + '">' + escape(event.url ? event.action : 'Открыть страницу колледжа') + '</a>'
       : dialogLink(event.id, event.action);
-    return '<article class="entry-card' + (event.featured ? ' admissions-events-featured' : '') + '"><' + heading + '>' +
-      escape(event.title) + '</' + heading + '><p>' + escape(event.text) + '</p>' + facts([
+    return '<article class="entry-card admissions-event-card"><h3>' +
+      escape(event.title) + '</h3><p>' + escape(event.text) + '</p>' + facts([
         ['Дата', event.date], ['Формат', event.format], ['Запись', event.registration]
       ]) + destination + '</article>';
   }
@@ -98,8 +101,7 @@
       escape(partner.color) + '" aria-hidden="true">' + escape(partner.mark) + '</span><p>' +
       escape(partner.name) + '</p><small>' + escape(partner.field) + '</small></li>'
     ).join('');
-    get('featured-events').innerHTML = draft.events.filter(event => event.featured).map(event => eventCard(event)).join('');
-    get('all-events').innerHTML = draft.events.map(event => eventCard(event)).join('');
+
     get('housing-card').innerHTML = '<h3>Общежития</h3><p>Узнай, кому дают место, когда подать заявку и сколько стоит проживание.</p>' +
       facts(draft.housing.fields) + '<a href="https://psu.ru/university-life/informatsiya-ob-obshchezhitiyakh/">Условия заселения</a>';
     get('scholarships-card').innerHTML = '<h3>Стипендии</h3><p>Посмотри, какие стипендии доступны первокурсникам и что нужно для их получения.</p>' +
@@ -199,7 +201,53 @@
     get('calendar-status').textContent = 'Показаны сроки поступления: ' + calendarModes[funding].toLowerCase();
   }
 
+  function setupEvents() {
+    const track = get('admissions-events-track');
+    const previous = document.querySelector('[data-events-previous]');
+    const next = document.querySelector('[data-events-next]');
+    const events = confirmedEvent.ends >= permDate.format(new Date()) ? [confirmedEvent, ...draft.events] : draft.events;
+    track.innerHTML = events.map(event => '<li>' + eventCard(event) + '</li>').join('');
+    const update = () => {
+      previous.disabled = track.scrollLeft < 2;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+    const move = direction => {
+      const gap = parseFloat(getComputedStyle(track).columnGap);
+      track.scrollBy({ left: direction * (track.firstElementChild.offsetWidth + gap),
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    };
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    track.addEventListener('scroll', update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    update();
+  }
+
+  function setupLifeTabs() {
+    const tabs = [...get('life-widget').querySelectorAll('[role="tab"]')];
+    const select = index => tabs.forEach((tab, i) => {
+      const active = index === i;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      get(tab.getAttribute('aria-controls')).hidden = !active;
+    });
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => select(index));
+      tab.addEventListener('keydown', event => {
+        const destinations = { ArrowLeft: (index + tabs.length - 1) % tabs.length,
+          ArrowRight: (index + 1) % tabs.length, Home: 0, End: tabs.length - 1 };
+        if (!Object.hasOwn(destinations, event.key)) return;
+        event.preventDefault();
+        const destination = destinations[event.key];
+        select(destination);
+        tabs[destination].focus();
+      });
+    });
+  }
+
   renderMainContent();
+  setupEvents();
+  setupLifeTabs();
   get('calendar-year').textContent = calendar.year;
   const calendarSection = get('calendar');
   calendarSection.addEventListener('change', event => {

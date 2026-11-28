@@ -536,9 +536,9 @@
   <section class="container admissions-picker-section" id="programs" aria-labelledby="picker-title">
     <div class="admissions-picker-heading">
       <h2 id="picker-title">Подбери специальность</h2>
-      <p><span id="catalog-info">Бакалавриат и специалитет</span> · <span id="admission-year">Приём 2027</span></p>
+      <p id="catalog-info">Бакалавриат и специалитет</p>
     </div>
-    <form class="program-picker" id="program-picker" novalidate aria-labelledby="picker-title">
+    <form class="program-picker" id="program-picker" novalidate aria-label="Подбор образовательной программы">
       <div class="picker-tabs" role="tablist" aria-label="Способ подбора">
         <button class="picker-tab" id="tab-exams" role="tab" type="button" aria-selected="true" aria-controls="panel-exams" tabindex="0"><span class="picker-tab-number">01</span> По предметам ЕГЭ</button>
         <button class="picker-tab" id="tab-program" role="tab" type="button" aria-selected="false" aria-controls="panel-program" tabindex="-1"><span class="picker-tab-number">02</span> По специальности</button>
@@ -551,32 +551,36 @@
           <p id="subject-hint" class="picker-hint" aria-live="polite">Загружаем предметы…</p>
         </div>
         <div id="panel-program" role="tabpanel" aria-labelledby="tab-program" hidden>
-          <div class="picker-heading"><h2>Что тебе интересно?</h2><p>Начни вводить название специальности или направления подготовки.</p></div>
+          <div class="picker-heading"><h2>Что тебе интересно?</h2><p>Начни вводить название программы или направления подготовки.</p></div>
           <div class="program-autocomplete">
-            <label class="visually-hidden" for="program-query">Название специальности или направления</label>
+            <label class="visually-hidden" for="program-query">Название программы или направления</label>
             <div class="program-input-wrap"><svg width="24" height="24" aria-hidden="true"><use href="#search"></use></svg><input id="program-query" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="program-suggestions" autocomplete="off" placeholder="Например, биология или информационные системы"><button id="clear-query" class="clear-query" type="button" aria-label="Очистить название" hidden>×</button></div>
-            <ul id="program-suggestions" class="program-suggestions" role="listbox" aria-label="Специальности" hidden></ul>
+            <ul id="program-suggestions" class="program-suggestions" role="listbox" aria-label="Программы" hidden></ul>
             <p class="picker-hint" id="query-hint">Можно искать по названию, направлению или коду.</p>
           </div>
         </div>
         <div id="panel-faculties" role="tabpanel" aria-labelledby="tab-faculties" hidden>
           <div class="picker-heading"><h2>Где ты хочешь учиться?</h2><p>Выбери один или несколько факультетов и институтов. Количество не ограничено.</p></div>
           <fieldset class="subject-fieldset" aria-describedby="faculty-hint"><legend class="visually-hidden">Факультеты и институты</legend><div id="faculty-options" class="subject-options"></div></fieldset>
-          <p id="faculty-hint" class="picker-hint" aria-live="polite">Без выбора показаны специальности всех факультетов.</p>
+          <p id="faculty-hint" class="picker-hint" aria-live="polite">Без выбора показаны программы всех факультетов.</p>
         </div>
         <div class="picker-filters">
           <fieldset class="picker-filter-group"><legend>Места</legend><label class="picker-check"><input id="paid-only" type="checkbox"><span>Есть платные места</span></label></fieldset>
           <fieldset class="picker-filter-group"><legend>Форма обучения</legend><div id="study-mode-options" class="mode-options"></div></fieldset>
           <button class="picker-reset" id="reset-picker" type="button">Сбросить фильтры <span aria-hidden="true">↺</span></button>
         </div>
-        <div class="picker-actions"><button type="submit" class="btn btn_red picker-submit" id="picker-submit">Показать специальности <span aria-hidden="true">↗</span></button><p id="picker-summary">Выбери предметы или перейди к поиску по названию.</p></div>
+        <div class="picker-actions"><button type="submit" class="btn btn_red picker-submit" id="picker-submit">Показать программы <span aria-hidden="true">↗</span></button><p id="picker-summary">Выбери предметы или перейди к поиску по названию.</p></div>
       </div>
     </form>
 
-    <div class="catalog-heading"><div><h2 id="results-heading">Все специальности</h2></div><p id="results-count" role="status" aria-live="polite">Загружаем специальности…</p></div>
-    <div id="program-results" class="program-results" aria-labelledby="results-heading" aria-busy="true"></div>
-    <nav id="program-pagination" class="program-pagination" aria-label="Страницы специальностей" hidden></nav>
-    <noscript><p class="catalog-empty">Для подбора специальностей включи JavaScript в браузере.</p></noscript>
+    <div class="admissions-results" id="picker-results" hidden>
+      <div class="admissions-results-content">
+        <div class="catalog-heading"><div><h2 id="results-heading">Все программы</h2></div><p id="results-count" role="status" aria-live="polite">Загружаем каталог…</p></div>
+        <div id="program-results" class="program-results" aria-labelledby="results-heading" aria-busy="true"></div>
+        <nav id="program-pagination" class="program-pagination" aria-label="Страницы программ" hidden></nav>
+      </div>
+    </div>
+    <noscript><p class="catalog-empty">Для подбора программ включи JavaScript в браузере.</p></noscript>
     <aside class="admissions-other" aria-labelledby="other-study-title">
       <h3 id="other-study-title">Другие варианты обучения</h3>
       <div class="admissions-link-list">
@@ -592,67 +596,69 @@
     <div class="container">
       <h2 class="entry-heading" id="facts-title">Почему Пермский университет</h2>
       <ul class="admissions-fact-list">
-        <li><strong>21-е место</strong><p>По параметру «Образование» в Национальном рейтинге университетов «Интерфакса», 2026.</p></li>
-        <li><strong>11 факультетов и институтов</strong><p>От математики и естественных наук до права, экономики и гуманитарных дисциплин.</p></li>
-        <li><strong>Единый кампус</strong><p>Учебные корпуса и университетские пространства на одной территории.</p></li>
-        <li><strong>15 тысяч студентов</strong><p>Здесь учатся будущие исследователи, разработчики, юристы и специалисты других профессий.</p></li>
-        <li><strong>110 лет истории</strong><p>Пермский университет отмечает 110-летие в 2026 году.</p></li>
+        <li class="admissions-fact-card"><img loading="lazy" src="assets/images/admissions/education.jpg" alt=""><div><h3>21-е место</h3><p>По параметру «Образование» в Национальном рейтинге университетов «Интерфакса», 2026.</p></div></li>
+        <li class="admissions-fact-card"><img loading="lazy" src="assets/images/admissions/faculties.jpg" alt=""><div><h3>11 факультетов и институтов</h3><p>От математики и естественных наук до права, экономики и гуманитарных дисциплин.</p></div></li>
+        <li class="admissions-fact-card"><img loading="lazy" src="assets/images/admissions/students.jpg" alt=""><div><h3>15 тысяч студентов</h3><p>Здесь учатся будущие исследователи, разработчики, юристы и специалисты других профессий.</p></div></li>
+        <li class="admissions-fact-card"><img loading="lazy" src="assets/images/admissions/campus.jpg" alt=""><div><h3>110 лет истории</h3><p>Пермский университет отмечает 110-летие в 2026 году.</p></div></li>
       </ul>
     </div>
   </section>
 
   <section class="container entry-section" id="how-to-apply" aria-labelledby="how-to-apply-title">
-    <h2 class="entry-heading" id="how-to-apply-title">Как поступить после 11-го класса</h2>
-    <div class="admissions-apply-grid">
-      <ol class="admissions-steps">
-        <li><h3>Выбери специальность и проверь экзамены</h3><p>Сравни направления, минимальные баллы по каждому предмету и проходные баллы прошлых лет.</p><a href="#programs">Подобрать специальность</a></li>
-        <li><h3>Подай документы</h3><p>Подготовь документы и выбери способ подачи. Отметь в заявлении специальности и расставь их по приоритету.</p><a href="#ways-to-apply" data-entry-dialog>Выбрать способ подачи</a></li>
-        <li><h3>Проверь условия зачисления</h3><p>Следи за конкурсными списками. Для бюджета проверь срок подачи согласия, для контракта — срок заключения договора.</p><a href="https://abiturient.psu.ru/">Открыть личный кабинет</a> <a href="https://psu.ru/postuplenie/">Конкурсные списки</a></li>
-      </ol>
-      <aside class="entry-card admissions-apply-links" aria-label="Документы и условия">
-        <a href="#document-list" data-entry-dialog>Список документов</a>
-        <a href="#ways-to-apply" data-entry-dialog>Способы подачи</a>
-        <a href="https://olymp.psu.ru/assets/user-doc/informatics/pravila-priema_bkl-2026.pdf">Правила приёма</a>
-        <a href="#after-college" data-entry-dialog>Поступление после СПО</a>
-      </aside>
-    </div>
-
-    <section class="entry-subsection admissions-calendar" id="calendar" aria-labelledby="calendar-title">
-      <div class="calendar-heading">
-        <h3 id="calendar-title" class="entry-subheading">Календарь поступления <span id="calendar-year"></span></h3>
-        <fieldset class="calendar-switch">
-          <legend class="visually-hidden">Условия поступления</legend>
-          <label><input type="radio" name="admission-funding" value="budget" checked><span>Бюджет</span></label>
-          <label><input type="radio" name="admission-funding" value="contract"><span>Контракт</span></label>
-        </fieldset>
-      </div>
-      <p id="calendar-status" class="visually-hidden" role="status"></p>
-      <ul id="calendar-key-dates" class="calendar-dates"></ul>
-      <details id="calendar-other" class="entry-details">
-        <summary>Все сроки</summary>
-        <ul id="calendar-other-dates" class="calendar-dates"></ul>
+    <h2 class="entry-heading" id="how-to-apply-title">Как поступить?</h2>
+    <ol class="admissions-steps">
+      <li><h3>Выбери специальность и проверь экзамены</h3><p>Сравни направления, минимальные баллы по каждому предмету и проходные баллы прошлых лет.</p><a href="#programs">Подобрать специальность</a></li>
+      <li><h3>Подай документы</h3><p>Подготовь документы и выбери способ подачи. Отметь в заявлении специальности и расставь их по приоритету.</p><a href="#ways-to-apply" data-entry-dialog>Выбрать способ подачи</a></li>
+      <li><h3>Проверь условия зачисления</h3><p>Следи за конкурсными списками. Для бюджета проверь срок подачи согласия, для контракта — срок заключения договора.</p><a href="https://abiturient.psu.ru/">Открыть личный кабинет</a> <a href="https://psu.ru/postuplenie/">Конкурсные списки</a></li>
+    </ol>
+    <div class="admissions-apply-accordions">
+      <details class="admissions-disclosure" id="calendar">
+        <summary id="calendar-title">Календарь абитуриента</summary>
+        <div class="admissions-disclosure-body admissions-calendar">
+          <div class="calendar-heading">
+            <h3 class="entry-subheading">Сроки приёма <span id="calendar-year"></span></h3>
+            <fieldset class="calendar-switch">
+              <legend class="visually-hidden">Условия поступления</legend>
+              <label><input type="radio" name="admission-funding" value="budget" checked><span>Бюджет</span></label>
+              <label><input type="radio" name="admission-funding" value="contract"><span>Контракт</span></label>
+            </fieldset>
+          </div>
+          <p id="calendar-status" class="visually-hidden" role="status"></p>
+          <ul id="calendar-key-dates" class="calendar-dates"></ul>
+          <details id="calendar-other" class="entry-details">
+            <summary>Все сроки</summary>
+            <ul id="calendar-other-dates" class="calendar-dates"></ul>
+          </details>
+        </div>
       </details>
-    </section>
-
-    <section class="entry-subsection" aria-labelledby="benefits-title">
-      <h3 class="entry-subheading" id="benefits-title">Олимпиады и дополнительные баллы</h3>
-      <div class="entry-grid entry-grid-three">
-        <article class="entry-card">
-          <h4>«Юные таланты»</h4>
-          <p>Выбери предмет и попробуй решить задания олимпиады. Ближайший пример — история.</p>
-          <dl class="entry-facts"><div><dt>Классы</dt><dd>10–11-е, история</dd></div><div><dt>Сроки</dt><dd>5 декабря 2026 — отборочный этап, 12 декабря 2026 — заключительный</dd></div><div><dt>Как учитывается результат</dt><dd>Диплом учитывается по правилам приёма соответствующего года и зависит от предмета олимпиады.</dd></div></dl>
-          <a href="https://olymp.psu.ru/">Зарегистрироваться</a>
-          <a href="https://olymp.psu.ru/news/otkryta-registratsiya-na-olimpiadu-po-istorii">Условия по истории на 2026 год</a>
-        </article>
-        <article class="entry-card" id="open-university-card"></article>
-        <article class="entry-card">
-          <h4>За что начисляют дополнительные баллы</h4>
-          <p>Проверь, какие твои достижения можно учесть при поступлении.</p>
-          <dl class="entry-facts"><div><dt>Классы</dt><dd>Выпускники 11-го класса и поступающие после СПО</dd></div><div><dt>Сроки</dt><dd>Подготовь подтверждения вместе с документами на поступление.</dd></div><div><dt>Как учитывается результат</dt><dd>К конкурсной сумме прибавят баллы за достижения из правил приёма.</dd></div></dl>
-          <a href="https://olymp.psu.ru/assets/user-doc/informatics/pravila-priema_bkl-2026.pdf">Достижения по правилам 2026 года</a>
-        </article>
+      <details class="admissions-disclosure">
+        <summary id="benefits-title">Дополнительные баллы</summary>
+        <div class="admissions-disclosure-body entry-grid entry-grid-three">
+          <article class="entry-card">
+            <h4>«Юные таланты»</h4>
+            <p>Выбери предмет и попробуй решить задания олимпиады. Ближайший пример — история.</p>
+            <dl class="entry-facts"><div><dt>Классы</dt><dd>10–11-е, история</dd></div><div><dt>Сроки</dt><dd>5 декабря 2026 — отборочный этап, 12 декабря 2026 — заключительный</dd></div><div><dt>Как учитывается результат</dt><dd>Диплом учитывается по правилам приёма соответствующего года и зависит от предмета олимпиады.</dd></div></dl>
+            <a href="https://olymp.psu.ru/">Зарегистрироваться</a>
+            <a href="https://olymp.psu.ru/news/otkryta-registratsiya-na-olimpiadu-po-istorii">Условия по истории на 2026 год</a>
+          </article>
+          <article class="entry-card" id="open-university-card"></article>
+          <article class="entry-card">
+            <h4>За что начисляют дополнительные баллы</h4>
+            <p>Проверь, какие твои достижения можно учесть при поступлении.</p>
+            <dl class="entry-facts"><div><dt>Классы</dt><dd>Выпускники 11-го класса и поступающие после СПО</dd></div><div><dt>Сроки</dt><dd>Подготовь подтверждения вместе с документами на поступление.</dd></div><div><dt>Как учитывается результат</dt><dd>К конкурсной сумме прибавят баллы за достижения из правил приёма.</dd></div></dl>
+            <a href="https://olymp.psu.ru/assets/user-doc/informatics/pravila-priema_bkl-2026.pdf">Достижения по правилам 2026 года</a>
+          </article>
+        </div>
+      </details>
+    </div>
+    <div class="admissions-doc-shortcuts">
+      <h3>Документы и условия приёма</h3>
+      <div class="admissions-link-list">
+        <a href="https://psu.ru/upload/iblock/35c/bj5el9jga7srh8k9s2e7p8khzaoaal91/pravila-priema_bkl-2026.pdf">Правила приёма</a>
+        <a href="#document-list" data-entry-dialog>Список документов</a>
+        <a href="https://psu.ru/postuplenie/bakalavriat/profilnye-ekzameny-dlya-postupayushchikh-na-baze-spo/">Поступление после СПО</a>
       </div>
-    </section>
+    </div>
   </section>
 
   <section class="admissions-career" aria-labelledby="career-title">
@@ -668,37 +674,37 @@
 
   <section class="container entry-section" id="events" aria-labelledby="events-title">
     <h2 class="entry-heading" id="events-title">Знакомимся с Пермским университетом</h2>
-    <div class="entry-grid entry-grid-two" id="featured-events"></div>
-    <details class="entry-details admissions-all-events">
-      <summary>Все мероприятия</summary>
-      <div class="entry-grid entry-grid-three" id="all-events"></div>
-    </details>
+    <div class="admissions-events-slider">
+      <div class="admissions-slider-controls" aria-label="Управление слайдером">
+        <button type="button" data-events-previous aria-label="Предыдущие мероприятия" aria-controls="admissions-events-track" disabled>←</button>
+        <button type="button" data-events-next aria-label="Следующие мероприятия" aria-controls="admissions-events-track" disabled>→</button>
+      </div>
+      <ul class="admissions-events-track" id="admissions-events-track" tabindex="0" aria-label="Мероприятия Пермского университета"></ul>
+    </div>
   </section>
 
   <section class="admissions-life" id="student-life" aria-labelledby="student-life-title">
     <div class="container entry-section">
       <h2 class="entry-heading" id="student-life-title">Студенческая жизнь</h2>
-      <div class="entry-grid entry-grid-two">
-        <article class="entry-card admissions-campus-card">
-          <img src="assets/images/admissions/campus.jpg" width="1019" height="574" alt="Учебные корпуса Пермского университета и сквер с фонтаном" loading="lazy">
-          <div class="entry-card-content">
-            <h3>Кампус</h3>
-            <p>Прогуляйся по университетскому городку и посмотри, где проходят занятия, встречи и студенческие события.</p>
-            <a href="https://yandex.ru/maps/?text=ПГНИУ%2C%20Пермь">Открыть карту кампуса</a>
-          </div>
-        </article>
-        <article class="entry-card" id="housing-card"></article>
-        <article class="entry-card" id="scholarships-card"></article>
-        <article class="entry-card">
-          <h3>Клубы и сообщества</h3>
-          <p>Студвесна, «Канифоль», настольные игры, турклуб «Пермский период» и студенческий медиацентр.</p>
-          <div class="admissions-link-list">
-            <a href="#club-sport" data-entry-dialog>Спорт</a>
-            <a href="#club-arts" data-entry-dialog>Творчество</a>
-            <a href="#club-media" data-entry-dialog>Медиа</a>
-            <a href="#club-volunteering" data-entry-dialog>Волонтёрство</a>
-          </div>
-        </article>
+      <div class="admissions-life-widget" id="life-widget">
+        <div class="admissions-life-tabs" role="tablist" aria-label="Студенческая жизнь">
+          <button type="button" id="life-tab-clubs" role="tab" aria-selected="true" aria-controls="life-panel-clubs">Клубы и сообщества</button>
+          <button type="button" id="life-tab-housing" role="tab" aria-selected="false" aria-controls="life-panel-housing" tabindex="-1">Общежития</button>
+          <button type="button" id="life-tab-scholarships" role="tab" aria-selected="false" aria-controls="life-panel-scholarships" tabindex="-1">Стипендии</button>
+        </div>
+        <div class="admissions-life-panel" id="life-panel-clubs" role="tabpanel" aria-labelledby="life-tab-clubs">
+          <article class="entry-card">
+            <p>Студвесна, «Канифоль», настольные игры, турклуб «Пермский период» и студенческий медиацентр.</p>
+            <div class="admissions-link-list">
+              <a href="#club-sport" data-entry-dialog>Спорт</a>
+              <a href="#club-arts" data-entry-dialog>Творчество</a>
+              <a href="#club-media" data-entry-dialog>Медиа</a>
+              <a href="#club-volunteering" data-entry-dialog>Волонтёрство</a>
+            </div>
+          </article>
+        </div>
+        <div class="admissions-life-panel" id="life-panel-housing" role="tabpanel" aria-labelledby="life-tab-housing" hidden><article class="entry-card" id="housing-card"></article></div>
+        <div class="admissions-life-panel" id="life-panel-scholarships" role="tabpanel" tabindex="0" aria-labelledby="life-tab-scholarships" hidden><article class="entry-card" id="scholarships-card"></article></div>
       </div>
     </div>
   </section>
@@ -721,6 +727,19 @@
         <div><h3>Очный приём</h3><p>Пермь, ул. Дзержинского, 2, корпус № 5</p><a class="entry-button entry-button-light" href="https://yandex.ru/maps/?rtext=~Пермь%2C%20улица%20Дзержинского%2C%202%2C%20корпус%205&amp;rtt=auto">Как добраться <span aria-hidden="true">↗</span></a></div>
       </div>
     </div>
+  </section>
+
+  <section class="container entry-section" id="admissions-documents" aria-labelledby="admissions-documents-title">
+    <h2 class="entry-heading" id="admissions-documents-title">Нормативные документы</h2>
+    <ul class="admissions-document-list">
+      <li><a href="https://psu.ru/upload/iblock/35c/bj5el9jga7srh8k9s2e7p8khzaoaal91/pravila-priema_bkl-2026.pdf"><strong>Бакалавриат и специалитет</strong><span>Правила приёма · 2026 · PDF</span><span class="admissions-document-arrow" aria-hidden="true">↗</span></a></li>
+      <li><a href="https://psu.ru/upload/iblock/7ea/d1tzy8ggni9mnsfvaeci8ta584f3g77h/pravila-priema_mag-2026.pdf"><strong>Магистратура</strong><span>Правила приёма · 2026 · PDF</span><span class="admissions-document-arrow" aria-hidden="true">↗</span></a></li>
+      <li><a href="https://psu.ru/upload/iblock/f51/98i2y9zqsi93dv5mo6r8375h4i11hsqv/pravila-priema_asp-2026.pdf"><strong>Аспирантура</strong><span>Правила приёма · 2026 · PDF</span><span class="admissions-document-arrow" aria-hidden="true">↗</span></a></li>
+      <li><a href="https://psu.ru/upload/iblock/172/0gurdbutf9jnc0479c6kgg756dn0fmwt/pravila-priema-spo-2026.pdf"><strong>Колледж</strong><span>Правила приёма · 2026 · PDF</span><span class="admissions-document-arrow" aria-hidden="true">↗</span></a></li>
+      <li><a href="https://psu.ru/upload/iblock/e86/dexl3gotdiy4mpjuuupndqnakryj2qfn/pravila-priema_litsei.pdf"><strong>Лицей</strong><span>Правила приёма · PDF</span><span class="admissions-document-arrow" aria-hidden="true">↗</span></a></li>
+      <li><a href="https://psu.ru/postuplenie/bakalavriat/sroki-priema-v-bakalavriat-i-spetsialitet/"><strong>Сроки приёма</strong><span>Бакалавриат и специалитет</span><span class="admissions-document-arrow" aria-hidden="true">↗</span></a></li>
+      <li><a href="https://psu.ru/postuplenie/bakalavriat/profilnye-ekzameny-dlya-postupayushchikh-na-baze-spo/"><strong>Профильные экзамены</strong><span>Поступление после СПО</span><span class="admissions-document-arrow" aria-hidden="true">↗</span></a></li>
+    </ul>
   </section>
 
   <dialog class="entry-dialog" id="admissions-dialog" aria-labelledby="admissions-dialog-title">

@@ -4,6 +4,7 @@
   const $ = selector => document.querySelector(selector);
   const form = $('#program-picker');
   const results = $('#program-results');
+  const resultsPanel = $('#picker-results');
   const query = $('#program-query');
   const suggestions = $('#program-suggestions');
   const subjectHint = $('#subject-hint');
@@ -34,7 +35,8 @@
   }
   function restoreFilters() {
     const saved = history.state?.[historyKey];
-    if (!saved || !modes.includes(saved.mode)) return;
+    if (!saved?.revealed || !modes.includes(saved.mode)) return;
+    resultsPanel.hidden = false;
     setMode(modes.indexOf(saved.mode), false);
     state.programId = data.programs.some(program => program.id === saved.programId) ? saved.programId : null;
     query.value = saved.query;
@@ -47,10 +49,14 @@
   }
   function rememberFilters(filters) {
     try {
-      history.replaceState({ ...history.state, [historyKey]: { ...filters, page } }, '');
+      history.replaceState({ ...history.state, [historyKey]: { ...filters, page, revealed: true } }, '');
     } catch {
       // Some browser settings restrict changes to History. The picker still works.
     }
+  }
+  function showResults() {
+    resultsPanel.hidden = false;
+    render();
   }
   function remainingSubjects(filters) {
     return Math.max(0, data.form.minOtherSubjects - filters.subjects.filter(id => !data.form.requiredSubjectIds.includes(id)).length);
@@ -87,8 +93,8 @@
     suggestions.hidden = !choices.length;
     query.setAttribute('aria-expanded', String(choices.length > 0));
     $('#query-hint').textContent = choices.length
-      ? `${choices.length} ${plural(choices.length, 'подсказка', 'подсказки', 'подсказок')}. Выбери специальность из списка или продолжай вводить название.`
-      : 'По этому запросу ничего не найдено. Попробуй другой запрос.';
+      ? `${choices.length} ${plural(choices.length, 'подсказка', 'подсказки', 'подсказок')}. Выбери программу из списка или продолжай вводить название.`
+      : 'Такого названия нет в каталоге. Попробуй другой запрос.';
   }
   function examOption(exam) {
     const label = exam.type === 'dvi' ? exam.title : subjectNames[exam.subjectId];
@@ -143,23 +149,24 @@
     const selectedCount = filters.subjects.length - data.form.requiredSubjectIds.length;
     subjectHint.classList.remove('is-error');
     subjectHint.textContent = remaining
-      ? `Выбери ещё ${remaining} ${plural(remaining, 'предмет', 'предмета', 'предметов')}. Пока показаны все специальности с учётом дополнительных фильтров.`
+      ? `Выбери ещё ${remaining} ${plural(remaining, 'предмет', 'предмета', 'предметов')}. Пока показаны все программы с учётом дополнительных фильтров.`
       : `Выбрано ${filters.subjects.length} ${plural(filters.subjects.length, 'предмет', 'предмета', 'предметов')}, включая русский язык. Можно добавить ещё.`;
+    if (resultsPanel.hidden) return;
     const rows = selectOffers(data, filters);
     const paged = paginate(rows, page);
     page = paged.page;
     rememberFilters(filters);
     const programCount = new Set(rows.map(row => row.program.id)).size;
     const filteringExams = filters.mode === 'exams' && !remaining;
-    $('#results-heading').textContent = filteringExams || (filters.mode === 'faculties' && filters.facultyIds.length) ? 'Подходящие специальности'
-      : filters.mode === 'program' && query.value.trim() ? 'Результаты поиска' : 'Все специальности';
-    $('#results-count').textContent = `${programCount} ${plural(programCount, 'специальность', 'специальности', 'специальностей')} · ${rows.length} ${plural(rows.length, 'вариант', 'варианта', 'вариантов')} обучения`;
+    $('#results-heading').textContent = filteringExams || (filters.mode === 'faculties' && filters.facultyIds.length) ? 'Подходящие программы'
+      : filters.mode === 'program' && query.value.trim() ? 'Результаты поиска' : 'Все программы';
+    $('#results-count').textContent = `${programCount} ${plural(programCount, 'программа', 'программы', 'программ')} · ${rows.length} ${plural(rows.length, 'вариант', 'варианта', 'вариантов')} обучения`;
     $('#picker-summary').textContent = filters.mode === 'exams' && remaining
       ? `Выбрано ${selectedCount} из ${data.form.minOtherSubjects} предметов по выбору. Верхнего ограничения нет.`
-      : `Найдено ${programCount} ${plural(programCount, 'специальность', 'специальности', 'специальностей')}. ${filters.studyModes.length ? 'С учётом формы обучения.' : 'Все формы обучения.'}`;
+      : `Найдено ${programCount} ${plural(programCount, 'программа', 'программы', 'программ')}. ${filters.studyModes.length ? 'С учётом формы обучения.' : 'Все формы обучения.'}`;
     $('#faculty-hint').textContent = filters.facultyIds.length
-      ? `Выбрано: ${filters.facultyIds.length}. Показаны специальности выбранных факультетов и институтов. Можно добавить ещё.`
-      : 'Без выбора показаны специальности всех факультетов.';
+      ? `Выбрано: ${filters.facultyIds.length}. Показаны программы выбранных факультетов и институтов. Можно добавить ещё.`
+      : 'Без выбора показаны программы всех факультетов.';
     results.innerHTML = rows.length ? paged.items.map(card).join('')
       : '<div class="catalog-empty"><h3>Подходящих вариантов пока нет.</h3><p>Попробуй изменить набор предметов или сбросить фильтры</p><button class="btn btn_red" type="button" data-reset-empty style="margin-top:24px">Сбросить фильтры</button></div>';
     pagination.hidden = paged.pageCount <= 1;
@@ -175,7 +182,7 @@
       panels[i].hidden = i !== index;
     });
     closeSuggestions();
-    if (renderResults) render();
+    if (renderResults) showResults();
   }
   function reset() {
     form.reset();
@@ -183,7 +190,7 @@
     query.value = '';
     closeSuggestions();
     $('#query-hint').textContent = 'Можно искать по названию, направлению или коду.';
-    render();
+    showResults();
   }
   async function init() {
     try {
@@ -195,8 +202,7 @@
       }
       if (!data?.programs?.length || !data?.offers?.length || data.schemaVersion !== 2) throw new Error('Unsupported catalog');
       subjectNames = Object.fromEntries(data.catalogs.subjects.map(subject => [subject.id, subject.label]));
-      $('#admission-year').textContent = `Приём ${data.metadata.admissionYear}`;
-      $('#catalog-info').textContent = `${data.programs.length} ${plural(data.programs.length, 'специальность', 'специальности', 'специальностей')} · Бакалавриат и специалитет`;
+      $('#catalog-info').textContent = `${data.programs.length} ${plural(data.programs.length, 'программа', 'программы', 'программ')} · Бакалавриат и специалитет`;
       $('#subject-options').innerHTML = data.catalogs.subjects.map(subject => {
         const required = data.form.requiredSubjectIds.includes(subject.id);
         return `<label class="subject-option"><input type="checkbox" name="subject" value="${escape(subject.id)}" ${required ? 'checked disabled' : ''}><span>${escape(subject.label)}</span></label>`;
@@ -207,10 +213,11 @@
       restoreFilters();
       render(false);
     } catch (error) {
+      resultsPanel.hidden = false;
       results.setAttribute('aria-busy', 'false');
-      $('#results-count').textContent = 'Не удалось загрузить специальности';
+      $('#results-count').textContent = 'Не удалось загрузить программы';
       subjectHint.textContent = 'Не удалось загрузить предметы.';
-      results.innerHTML = '<div class="catalog-empty" role="alert"><h3>Не удалось загрузить специальности</h3><p>Попробуй ещё раз.</p><button class="btn btn_red" type="button" data-retry style="margin-top:24px">Попробовать снова</button></div>';
+      results.innerHTML = '<div class="catalog-empty" role="alert"><h3>Не удалось загрузить программы</h3><p>Попробуй ещё раз.</p><button class="btn btn_red" type="button" data-retry style="margin-top:24px">Попробовать снова</button></div>';
     }
   }
   tabs.forEach((tab, index) => {
@@ -223,10 +230,11 @@
       tabs[next].focus();
     });
   });
-  form.addEventListener('change', () => { if (data) render(); });
+  form.addEventListener('change', () => { if (data) showResults(); });
   form.addEventListener('submit', event => {
     event.preventDefault();
     if (!data) return;
+    showResults();
     if (state.mode === 'exams' && remainingSubjects(getFilters())) {
       subjectHint.classList.add('is-error');
       subjectHint.textContent = 'Для подбора по ЕГЭ выбери минимум два предмета помимо русского языка.';
@@ -234,10 +242,9 @@
       return;
     }
     closeSuggestions();
-    render();
     $('.catalog-heading').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
   });
-  query.addEventListener('input', () => { if (data) { state.programId = null; openSuggestions(); render(); } });
+  query.addEventListener('input', () => { if (data) { state.programId = null; openSuggestions(); showResults(); } });
   query.addEventListener('focus', () => { if (data) openSuggestions(); });
   query.addEventListener('keydown', event => {
     if (!data) return;

@@ -10,6 +10,8 @@
   const tabs = [$('#tab-exams'), $('#tab-program'), $('#tab-faculties')];
   const panels = [$('#panel-exams'), $('#panel-program'), $('#panel-faculties')];
   const pagination = $('#program-pagination');
+  const historyKey = 'admissionsPicker';
+  const modes = ['exams', 'program', 'faculties'];
   const state = { mode: 'exams', programId: null };
   const number = new Intl.NumberFormat('ru-RU');
   const escape = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[character]));
@@ -29,6 +31,26 @@
       paidOnly: $('#paid-only').checked,
       studyModes: [...form.querySelectorAll('input[name="study-mode"]:checked')].map(input => input.value),
     };
+  }
+  function restoreFilters() {
+    const saved = history.state?.[historyKey];
+    if (!saved || !modes.includes(saved.mode)) return;
+    setMode(modes.indexOf(saved.mode), false);
+    state.programId = data.programs.some(program => program.id === saved.programId) ? saved.programId : null;
+    query.value = saved.query;
+    $('#paid-only').checked = saved.paidOnly;
+    const groups = { subject: saved.subjects, faculty: saved.facultyIds, 'study-mode': saved.studyModes };
+    for (const input of form.querySelectorAll('input[type="checkbox"]:not(:disabled)')) {
+      if (groups[input.name]) input.checked = groups[input.name].includes(input.value);
+    }
+    page = saved.page;
+  }
+  function rememberFilters(filters) {
+    try {
+      history.replaceState({ ...history.state, [historyKey]: { ...filters, page } }, '');
+    } catch {
+      // Some browser settings restrict changes to History. The picker still works.
+    }
   }
   function remainingSubjects(filters) {
     return Math.max(0, data.form.minOtherSubjects - filters.subjects.filter(id => !data.form.requiredSubjectIds.includes(id)).length);
@@ -65,8 +87,8 @@
     suggestions.hidden = !choices.length;
     query.setAttribute('aria-expanded', String(choices.length > 0));
     $('#query-hint').textContent = choices.length
-      ? `${choices.length} ${plural(choices.length, 'подсказка', 'подсказки', 'подсказок')}. Выбери программу из списка или продолжай вводить название.`
-      : 'Такого названия нет в каталоге. Попробуй другой запрос.';
+      ? `${choices.length} ${plural(choices.length, 'подсказка', 'подсказки', 'подсказок')}. Выбери специальность из списка или продолжай вводить название.`
+      : 'По этому запросу ничего не найдено. Попробуй другой запрос.';
   }
   function examOption(exam) {
     const label = exam.type === 'dvi' ? exam.title : subjectNames[exam.subjectId];
@@ -93,7 +115,7 @@
       // A current-year zero does not establish whether there was a historical competition.
       value = '<span class="stat-text">Нет данных</span>';
     }
-    return `<div class="program-stat"><dt>Проходной балл · ${label.toLowerCase()}</dt><dd>${value}</dd>${note ? `<small>${escape(note)}</small>` : ''}</div>`;
+    return `<div class="program-stat"><dt>Проходной балл ${result?.year ?? data.metadata.resultYear} · ${label.toLowerCase()}</dt><dd>${value}</dd>${note ? `<small>${escape(note)}</small>` : ''}</div>`;
   }
   function card(row) {
     const { program, offer, budget, paid, matching } = row;
@@ -111,7 +133,7 @@
     return `<a class="program-card" href="program.html" data-offer-id="${escape(offer.id)}" aria-labelledby="program-${escape(offer.id)}">
       <div class="program-card-main">${program.directionCode ? `<p class="program-card-code">${escape(program.directionCode)}</p>` : ''}<h3 id="program-${escape(offer.id)}">${escape(program.title)}</h3><p class="program-card-direction">Направление подготовки:<br>${escape(program.directionTitle)}</p><div class="program-tags"><span class="program-tag">${escape(data.catalogs.levels[program.level])}</span><span class="program-tag">${escape(data.catalogs.studyModes[offer.studyMode])}</span></div></div>
       <div class="program-card-exams"><p class="program-card-caption">Вступительные испытания</p><p class="program-card-subcaption">Предметы и минимальные баллы</p>${examGroups.map(group => examBlock(group.requirements, examGroups.length > 1 ? group.funding.join(' и ') : '')).join('')}</div>
-      <div class="program-card-facts"><dl class="program-stats"><div class="program-stat"><dt>Бюджетные места</dt><dd>${places(budget)}</dd></div><div class="program-stat"><dt>Платные места</dt><dd>${places(paid)}</dd></div>${resultStat(row, 'budget')}${resultStat(row, 'paid')}</dl><dl class="program-tuition"><dt>Стоимость обучения</dt><dd>${price}</dd></dl>${groupCompetition ? '<p class="program-group-note">Места указаны для общего конкурса нескольких программ.</p>' : ''}</div>
+      <div class="program-card-facts"><dl class="program-stats"><div class="program-stat"><dt>Бюджетные места</dt><dd>${places(budget)}</dd></div><div class="program-stat"><dt>Платные места</dt><dd>${places(paid)}</dd></div>${resultStat(row, 'budget')}${resultStat(row, 'paid')}</dl><dl class="program-tuition"><dt>Стоимость обучения</dt><dd>${price}</dd></dl>${groupCompetition ? '<p class="program-group-note">Места указаны для общего конкурса нескольких специальностей.</p>' : ''}</div>
     </a>`;
   }
   function render(resetPage = true) {
@@ -121,38 +143,39 @@
     const selectedCount = filters.subjects.length - data.form.requiredSubjectIds.length;
     subjectHint.classList.remove('is-error');
     subjectHint.textContent = remaining
-      ? `Выбери ещё ${remaining} ${plural(remaining, 'предмет', 'предмета', 'предметов')}. Пока показаны все программы с учётом дополнительных фильтров.`
+      ? `Выбери ещё ${remaining} ${plural(remaining, 'предмет', 'предмета', 'предметов')}. Пока показаны все специальности с учётом дополнительных фильтров.`
       : `Выбрано ${filters.subjects.length} ${plural(filters.subjects.length, 'предмет', 'предмета', 'предметов')}, включая русский язык. Можно добавить ещё.`;
     const rows = selectOffers(data, filters);
     const paged = paginate(rows, page);
     page = paged.page;
+    rememberFilters(filters);
     const programCount = new Set(rows.map(row => row.program.id)).size;
     const filteringExams = filters.mode === 'exams' && !remaining;
-    $('#results-heading').textContent = filteringExams || (filters.mode === 'faculties' && filters.facultyIds.length) ? 'Подходящие программы'
-      : filters.mode === 'program' && query.value.trim() ? 'Результаты поиска' : 'Все программы';
-    $('#results-count').textContent = `${programCount} ${plural(programCount, 'программа', 'программы', 'программ')} · ${rows.length} ${plural(rows.length, 'вариант', 'варианта', 'вариантов')} обучения`;
+    $('#results-heading').textContent = filteringExams || (filters.mode === 'faculties' && filters.facultyIds.length) ? 'Подходящие специальности'
+      : filters.mode === 'program' && query.value.trim() ? 'Результаты поиска' : 'Все специальности';
+    $('#results-count').textContent = `${programCount} ${plural(programCount, 'специальность', 'специальности', 'специальностей')} · ${rows.length} ${plural(rows.length, 'вариант', 'варианта', 'вариантов')} обучения`;
     $('#picker-summary').textContent = filters.mode === 'exams' && remaining
       ? `Выбрано ${selectedCount} из ${data.form.minOtherSubjects} предметов по выбору. Верхнего ограничения нет.`
-      : `Найдено ${programCount} ${plural(programCount, 'программа', 'программы', 'программ')}. ${filters.studyModes.length ? 'С учётом формы обучения.' : 'Все формы обучения.'}`;
+      : `Найдено ${programCount} ${plural(programCount, 'специальность', 'специальности', 'специальностей')}. ${filters.studyModes.length ? 'С учётом формы обучения.' : 'Все формы обучения.'}`;
     $('#faculty-hint').textContent = filters.facultyIds.length
-      ? `Выбрано: ${filters.facultyIds.length}. Показаны программы выбранных факультетов и институтов. Можно добавить ещё.`
-      : 'Без выбора показаны программы всех факультетов.';
+      ? `Выбрано: ${filters.facultyIds.length}. Показаны специальности выбранных факультетов и институтов. Можно добавить ещё.`
+      : 'Без выбора показаны специальности всех факультетов.';
     results.innerHTML = rows.length ? paged.items.map(card).join('')
-      : '<div class="catalog-empty"><h3>Пока нет подходящих программ</h3><p>Измени предметы, специальность или факультеты либо сними дополнительные фильтры.</p><button class="btn btn_red" type="button" data-reset-empty style="margin-top:24px">Сбросить фильтры</button></div>';
+      : '<div class="catalog-empty"><h3>Подходящих вариантов пока нет.</h3><p>Попробуй изменить набор предметов или сбросить фильтры</p><button class="btn btn_red" type="button" data-reset-empty style="margin-top:24px">Сбросить фильтры</button></div>';
     pagination.hidden = paged.pageCount <= 1;
     pagination.innerHTML = paged.pageCount > 1 ? `<button type="button" data-page="${page - 1}" ${page === 1 ? 'disabled' : ''} aria-label="Предыдущая страница">←</button>${Array.from({length:paged.pageCount}, (_, i) => `<button type="button" data-page="${i + 1}" aria-label="Страница ${i + 1}" ${page === i + 1 ? 'aria-current="page"' : ''}>${i + 1}</button>`).join('')}<button type="button" data-page="${page + 1}" ${page === paged.pageCount ? 'disabled' : ''} aria-label="Следующая страница">→</button><p class="pagination-range">${paged.start + 1}–${paged.start + paged.items.length} из ${paged.total}</p>` : '';
     results.setAttribute('aria-busy', 'false');
     $('#clear-query').hidden = !query.value;
   }
-  function setMode(index) {
-    state.mode = ['exams', 'program', 'faculties'][index];
+  function setMode(index, renderResults = true) {
+    state.mode = modes[index];
     tabs.forEach((tab, i) => {
       tab.setAttribute('aria-selected', String(i === index));
       tab.tabIndex = i === index ? 0 : -1;
       panels[i].hidden = i !== index;
     });
     closeSuggestions();
-    render();
+    if (renderResults) render();
   }
   function reset() {
     form.reset();
@@ -172,8 +195,8 @@
       }
       if (!data?.programs?.length || !data?.offers?.length || data.schemaVersion !== 2) throw new Error('Unsupported catalog');
       subjectNames = Object.fromEntries(data.catalogs.subjects.map(subject => [subject.id, subject.label]));
-      $('#admission-year').textContent = `Поступление — ${data.metadata.admissionYear}`;
-      $('#catalog-info').textContent = `${data.programs.length} ${plural(data.programs.length, 'программа', 'программы', 'программ')} · Бакалавриат и специалитет`;
+      $('#admission-year').textContent = `Приём ${data.metadata.admissionYear}`;
+      $('#catalog-info').textContent = `${data.programs.length} ${plural(data.programs.length, 'специальность', 'специальности', 'специальностей')} · Бакалавриат и специалитет`;
       $('#subject-options').innerHTML = data.catalogs.subjects.map(subject => {
         const required = data.form.requiredSubjectIds.includes(subject.id);
         return `<label class="subject-option"><input type="checkbox" name="subject" value="${escape(subject.id)}" ${required ? 'checked disabled' : ''}><span>${escape(subject.label)}</span></label>`;
@@ -181,12 +204,13 @@
       $('#faculty-options').innerHTML = data.catalogs.faculties.map(faculty => `<label class="subject-option"><input type="checkbox" name="faculty" value="${escape(faculty.id)}"><span>${escape(faculty.label)}</span></label>`).join('');
       $('#study-mode-options').innerHTML = Object.entries(data.catalogs.studyModes).map(([id, label]) => `<label class="picker-check"><input type="checkbox" name="study-mode" value="${escape(id)}" ${data.form.filters.studyModes.includes(id) ? 'checked' : ''}><span>${escape(label)}</span></label>`).join('');
       $('#paid-only').checked = $('#paid-only').defaultChecked = data.form.filters.hasPaidPlaces;
-      render();
+      restoreFilters();
+      render(false);
     } catch (error) {
       results.setAttribute('aria-busy', 'false');
-      $('#results-count').textContent = 'Каталог недоступен';
+      $('#results-count').textContent = 'Не удалось загрузить специальности';
       subjectHint.textContent = 'Не удалось загрузить предметы.';
-      results.innerHTML = '<div class="catalog-empty" role="alert"><h3>Не удалось загрузить программы</h3><p>Проверь наличие файла admissions.json в папке assets/json и обнови страницу.</p><button class="btn btn_red" type="button" data-retry style="margin-top:24px">Попробовать снова</button></div>';
+      results.innerHTML = '<div class="catalog-empty" role="alert"><h3>Не удалось загрузить специальности</h3><p>Попробуй ещё раз.</p><button class="btn btn_red" type="button" data-retry style="margin-top:24px">Попробовать снова</button></div>';
     }
   }
   tabs.forEach((tab, index) => {
